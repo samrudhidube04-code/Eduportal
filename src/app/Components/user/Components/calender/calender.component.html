@@ -1,0 +1,20 @@
+<div class="container mt-4">
+    <div class="card shadow-sm p-4">
+        <h4 class="mb-4">🗓️ Weekly Timetable</h4>
+
+        <table class="table table-bordered text-center align-middle">
+            <thead class="table-light">
+                <tr>
+                    <th>Day</th>
+                    <th *ngFor="let slot of timeSlots">{{ slot }}</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let day of timetable">
+                    <td><strong>{{ day.day }}</strong></td>
+                    <td *ngFor="let subject of day.slots">{{ subject }}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

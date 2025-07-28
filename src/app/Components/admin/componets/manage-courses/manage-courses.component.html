@@ -1,0 +1,113 @@
+<div class="container mt-4">
+    <h3 class="mb-4">➕ Add Course</h3>
+
+    <!-- Course Form -->
+    <form (ngSubmit)="addCourse()" #courseForm="ngForm" class="mb-4">
+        <!-- Course Name -->
+        <div class="mb-3">
+            <label for="courseName" class="form-label">Course Name</label>
+            <input type="text" id="courseName" class="form-control" [(ngModel)]="newCourse.name" name="name" required />
+        </div>
+
+        <!-- Course Description -->
+        <div class="mb-3">
+            <label for="courseDesc" class="form-label">Description</label>
+            <textarea id="courseDesc" class="form-control" [(ngModel)]="newCourse.description" name="description"
+                rows="3" required></textarea>
+        </div>
+
+        <!-- Course Price -->
+        <div class="mb-3">
+            <label for="coursePrice" class="form-label">Price (₹)</label>
+            <input type="number" id="coursePrice" class="form-control" [(ngModel)]="newCourse.price" name="price"
+                required />
+        </div>
+
+        <!-- Image Choice Section -->
+        <label class="form-label">Choose Image:</label>
+
+        <!-- Option 1: Image URL -->
+        <input type="text" [(ngModel)]="imageUrlInput" (input)="setImageFromUrl()" placeholder="Paste Image URL"
+            class="form-control mb-2" name="imageUrl" />
+
+        <!-- OR Option 2: Upload from system -->
+        <input type="file" accept="image/*" (change)="onImageSelected($event)" class="form-control mb-2" />
+
+        <!-- Preview -->
+        <div *ngIf="newCourse.image">
+            <img [src]="newCourse.image" alt="Course Image" style="width: 150px; height: auto;" />
+        </div>
+
+        <button type="submit" class="btn btn-success" (click)="addCourse()">Add Course</button>
+    </form>
+
+    <!-- Displaying Added Courses -->
+    <h4 class="mt-4">📚 All Courses</h4>
+    <!-- <div *ngFor="let course of courses" class="card mb-3 shadow-sm">
+        <img [src]="course.image" class="card-img-top" alt="Course Image" style="height: 200px; object-fit: cover;" />
+        <div class="card-body">
+            <h5 class="card-title">{{ course.name }}</h5>
+            <p class="card-text">{{ course.description }}</p>
+            <p class="card-text"><strong>Price:</strong> ₹{{ course.price }}</p>
+        </div>
+    </div> -->
+
+    <div class="table-responsive">
+        <table class="table table-bordered table-striped align-middle text-center">
+            <thead class="table-primary">
+                <tr>
+                    <th>Image</th>
+                    <th>Name</th>
+                    <th>Description</th>
+                    <th>Price</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let course of courses let i = index">
+                    <td>
+                        <img [src]="course.image" class="img-thumbnail" alt="Course Image"
+                            style="height: 50px; width: 80px; object-fit: cover;" />
+                    </td>
+                    <td>{{ course.name }}</td>
+                    <td>{{ course.description }}</td>
+                    <td>₹{{ course.price }}</td>
+                    <td>
+                        <button class="btn btn-sm btn-success me-1" (click)="startEdit(i)">Edit</button>
+                        <button class="btn btn-sm btn-danger" (click)="deleteCourse(i)">Delete</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+        <!-- Edit Form -->
+        <div *ngIf="editingIndex !== null" class="border p-3 rounded bg-light mt-4">
+            <h5>Edit Course</h5>
+            <form (ngSubmit)="saveEdit()">
+                <div class="mb-2">
+                    <label>Course Name</label>
+                    <input type="text" class="form-control" [(ngModel)]="editedCourse.name" name="name" required />
+                </div>
+                <div class="mb-2">
+                    <label>Description</label>
+                    <textarea class="form-control" [(ngModel)]="editedCourse.description" name="description"
+                        required></textarea>
+                </div>
+                <div class="mb-2">
+                    <label>Price (₹)</label>
+                    <input type="number" class="form-control" [(ngModel)]="editedCourse.price" name="price" required />
+                </div>
+                <div class="mb-2">
+                    <label>Image URL</label>
+                    <input type="text" class="form-control" [(ngModel)]="editedCourse.image" name="image" />
+                </div>
+                <div class="mb-2">
+                    <img [src]="editedCourse.image" class="img-thumbnail" width="100" *ngIf="editedCourse.image">
+                </div>
+                <button class="btn btn-success me-2" type="submit">Save</button>
+                <button class="btn btn-secondary" type="button" (click)="cancelEdit()">Cancel</button>
+            </form>
+        </div>
+    </div>
+
+</div>

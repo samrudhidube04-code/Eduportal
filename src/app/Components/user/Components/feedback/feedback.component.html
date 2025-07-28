@@ -1,0 +1,40 @@
+<div class="container mt-4">
+    <div class="card shadow-sm p-4">
+        <h4 class="mb-4">📝 Submit Feedback</h4>
+
+        <form (ngSubmit)="submitFeedback()" #feedbackForm="ngForm">
+            <!-- Name -->
+            <div class="mb-3">
+                <label for="name" class="form-label">Your Name</label>
+                <input type="text" id="name" class="form-control" required [(ngModel)]="feedback.name" name="name">
+            </div>
+
+            <!-- Email -->
+            <div class="mb-3">
+                <label for="email" class="form-label">Email (optional)</label>
+                <input type="email" id="email" class="form-control" [(ngModel)]="feedback.email" name="email">
+            </div>
+
+            <!-- Feedback Text -->
+            <div class="mb-3">
+                <label for="message" class="form-label">Your Feedback</label>
+                <textarea id="message" class="form-control" rows="4" required [(ngModel)]="feedback.message"
+                    name="message"></textarea>
+            </div>
+
+            <!-- Rating -->
+            <div class="mb-3">
+                <label class="form-label">Rating</label>
+                <select class="form-select" [(ngModel)]="feedback.rating" name="rating" required>
+                    <option value="" disabled selected>Select rating</option>
+                    <option *ngFor="let r of [1,2,3,4,5]" [value]="r">{{ r }} Star{{ r > 1 ? 's' : '' }}</option>
+                </select>
+            </div>
+
+            <!-- Submit Button -->
+            <button class="btn btn-primary" type="submit" [disabled]="!feedbackForm.form.valid">
+                Submit Feedback
+            </button>
+        </form>
+    </div>
+</div>

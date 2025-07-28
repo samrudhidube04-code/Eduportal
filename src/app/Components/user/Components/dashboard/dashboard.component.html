@@ -1,0 +1,127 @@
+<div class="d-flex bg-white" id="wrapper">
+
+    <!-- Sidebar -->
+    <div class="bg-secondary border-end text-white sidebar" id="sidebar-wrapper">
+        <div class="sidebar-heading text-center py-4 fs-4 fw-bold border-bottom">
+            <i class="bi bi-mortarboard-fill me-2"></i>EduPortal
+        </div>
+        <div class="list-group list-group-flush my-3">
+            <a class="list-group-item list-group-item-action bg-dark text-white">
+                <i class="bi bi-house-door-fill me-2"></i>Dashboard
+            </a>
+            <a routerLink="mycourse" class="list-group-item list-group-item-action bg-dark text-white">
+                <i class="bi bi-book-fill me-2"></i>My Courses
+            </a>
+            <a routerLink="feedback" class="list-group-item list-group-item-action bg-dark text-white">
+                <i class="bi bi-people-fill me-2"></i>Feedback
+            </a>
+            <a routerLink="calender" class="list-group-item list-group-item-action bg-dark text-white">
+                <i class="bi bi-clipboard-data-fill me-2"></i>Calendar
+            </a>
+            <a routerLink="profile" class="list-group-item list-group-item-action bg-dark text-white">
+                <i class="bi bi-person-circle me-2"></i>Profile
+            </a>
+            <button class="btn btn-danger w-75 mt-3 ms-3" (click)="logout()">Logout</button>
+        </div>
+    </div>
+
+    <!-- Main Page Content -->
+    <div class="flex-grow-1">
+        <nav class="navbar navbar-light bg-white border-bottom px-4 py-3">
+            <span class="navbar-brand">Welcome, {{ user.name }}!</span>
+        </nav>
+
+        <div class="content px-4 py-4">
+            <!-- Stat Cards -->
+            <div class="row g-4 mb-4">
+                <div class="col-md-4">
+                    <div class="card bg-primary text-white shadow-sm">
+                        <div class="card-body d-flex justify-content-between align-items-center">
+                            <div>
+                                <h5>Enrolled Courses</h5>
+                                <h3>{{ myCourses.length }}</h3>
+                            </div>
+                            <span>📚</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="card bg-success text-white shadow-sm">
+                        <div class="card-body d-flex justify-content-between align-items-center">
+                            <div>
+                                <h5>Active Courses</h5>
+                                <h3>{{ activeCourses }}</h3>
+                            </div>
+                            <span>🚀</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="card bg-warning text-dark shadow-sm">
+                        <div class="card-body d-flex justify-content-between align-items-center">
+                            <div>
+                                <h5>Avg Progress</h5>
+                                <h3>{{ averageProgress }}%</h3>
+                            </div>
+                            <span>📈</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Enrolled Courses Table -->
+            <div class="card">
+                <div class="card-header bg-white">
+                    <h5 class="mb-0">📘 My Enrolled Courses</h5>
+                </div>
+                <div class="card-body p-0">
+                    <table class="table table-hover table-bordered mb-0">
+                        <thead class="table-light">
+                            <tr>
+                                <th>#</th>
+                                <th>Course Name</th>
+                                <th>Description</th>
+                                <th>Progress</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let course of myCourses; index as i">
+                                <td>{{ i + 1 }}</td>
+                                <td>{{ course.name }}</td>
+                                <td>{{ course.description }}</td>
+                                <td>
+                                    <div class="progress" style="height: 18px;">
+                                        <div class="progress-bar" role="progressbar" [style.width.%]="course.progress"
+                                            [ngClass]="{
+                        'bg-danger': course.progress < 30,
+                        'bg-warning': course.progress >= 30 && course.progress < 80,
+                        'bg-success': course.progress >= 80
+                      }">
+                                            {{ course.progress }}%
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <span class="badge" [ngClass]="{
+                      'bg-success': course.status === 'Active',
+                      'bg-secondary': course.status === 'Completed',
+                      'bg-warning text-dark': course.status === 'In Progress'
+                    }">
+                                        {{ course.status }}
+                                    </span>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <div *ngIf="myCourses.length === 0" class="p-3 text-center text-muted">
+                        No enrolled courses yet.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

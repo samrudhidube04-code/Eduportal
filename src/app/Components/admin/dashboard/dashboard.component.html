@@ -1,0 +1,192 @@
+<div class="d-flex bg-white" [ngClass]="{ 'toggled': isCollapsed }" id="wrapper">
+
+
+    <div class="bg-secondary border-end text-white sidebar" id="sidebar-wrapper">
+        <div class="sidebar-heading text-center py-4 fs-4 fw-bold text-uppercase border-bottom">
+            <i class="bi bi-mortarboard-fill me-2"></i>EduPortal Admin
+        </div>
+        <div class="list-group list-group-flush my-3">
+            <a class="list-group-item list-group-item-action bg-dark text-white">
+                <i class="bi bi-house-door-fill me-2"></i>Dashboard
+            </a>
+            <a routerLink="managecourses" class="list-group-item list-group-item-action bg-dark text-white">
+                <i class="bi bi-book-fill me-2"></i>Manage Courses
+            </a>
+            <a routerLink="manageusers" class="list-group-item list-group-item-action bg-dark text-white">
+                <i class="bi bi-people-fill me-2"></i>Manage Users
+            </a>
+            <!-- <a routerLink="reports" class="list-group-item list-group-item-action bg-dark text-white">
+                <i class="bi bi-clipboard-data-fill me-2"></i>Reports
+            </a> -->
+            <a routerLink="profile" class="list-group-item list-group-item-action bg-dark text-white">
+                <i class="bi bi-person-circle me-2"></i>Profile
+            </a>
+            <button class="btn btn-danger w-75 mt-3 ms-3" (click)="logout()">Logout</button>
+        </div>
+    </div>
+
+    <!-- Page Content -->
+    <div id="page-content-wrapper" class="w-100">
+
+        <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom px-3">
+            <button class="btn btn-outline-primary" (click)="toggleSidebar()">
+                <i class="bi bi-list"></i>
+            </button>
+
+            <span class="navbar-brand ms-3">Admin Dashboard</span>
+        </nav>
+
+        <div class="container-fluid p-4">
+            <h2 class="mb-4">Welcome back, Admin!</h2>
+
+        </div>
+
+
+        <div class="container py-4">
+
+            <!-- Page Title -->
+            <h4 class="mb-4 fw-bold text-primary">📊 Course Insights</h4>
+
+            <!-- CARDS -->
+            <div class="row g-4 mb-5">
+                <!-- Total Courses -->
+                <div class="col-md-4" (click)="scrollTo('totalCourses')">
+                    <div class="card bg-info text-white shadow-sm">
+                        <div class="card-body">
+                            <h5><i class="bi bi-journal-bookmark-fill me-2"></i>Total Courses</h5>
+                            <h3>{{ totalCourses }}</h3>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Active Courses -->
+                <div class="col-md-4" (click)="scrollTo('activeCourses')">
+                    <div class="card bg-success text-white shadow-sm">
+                        <div class="card-body">
+                            <h5><i class="bi bi-check-circle-fill me-2"></i>Active Courses</h5>
+                            <h3>{{ activeCourses }}</h3>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Pending Approvals -->
+                <div class="col-md-4" (click)="scrollTo('pendingApprovals')">
+                    <div class="card bg-warning text-dark shadow-sm">
+                        <div class="card-body">
+                            <h5><i class="bi bi-hourglass-split me-2"></i>Pending Approvals</h5>
+                            <h3>{{ pendingApprovals }}</h3>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Categories -->
+                <div class="col-md-4" (click)="scrollTo('categories')">
+                    <div class="card bg-primary text-white shadow-sm">
+                        <div class="card-body">
+                            <h5><i class="bi bi-tags-fill me-2"></i>Categories</h5>
+                            <h3>{{ categories }}</h3>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Enrollments -->
+                <div class="col-md-4" (click)="scrollTo('enrollments')">
+                    <div class="card bg-secondary text-white shadow-sm">
+                        <div class="card-body">
+                            <h5><i class="bi bi-person-lines-fill me-2"></i>Enrollments</h5>
+                            <h3>{{ enrollments }}</h3>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Course Reviews -->
+                <div class="col-md-4" (click)="scrollTo('courseReviews')">
+                    <div class="card bg-danger text-white shadow-sm">
+                        <div class="card-body">
+                            <h5><i class="bi bi-chat-dots-fill me-2"></i>Course Reviews</h5>
+                            <h3>{{ courseReviews }}</h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- DETAIL SECTIONS -->
+
+            <div class="pt-4 border-top">
+
+                <!-- 🔽 TOTAL COURSES -->
+                <div id="totalCourses" class="mb-5">
+                    <h5 class="text-info fw-semibold">📘 Total Courses ({{ totalCourses }})</h5>
+                    <p>Below are the types of courses currently available on the platform:</p>
+
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item" *ngFor="let type of courseTypes">
+                            <i class="bi bi-check-circle-fill text-success me-2"></i>{{ type.name }} ({{ type.count }})
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- 🔽 ACTIVE COURSES -->
+                <div id="activeCourses" class="mb-5">
+                    <h5 class="text-success fw-semibold">✅ Active Courses ({{ activeCourses }})</h5>
+                    <p>These are the courses currently available and open for student enrollment.</p>
+                </div>
+
+                <!-- 🔽 PENDING APPROVALS -->
+                <div id="pendingApprovals" class="mb-5">
+                    <h5 class="text-warning fw-semibold">⏳ Pending Approvals ({{ pendingApprovals }})</h5>
+                    <p>Courses awaiting review and admin approval before being published.</p>
+                </div>
+
+                <!-- 🔽 CATEGORIES -->
+                <div id="categories" class="mb-5">
+                    <h5 class="text-primary fw-semibold">🏷️ Categories ({{ categories }})</h5>
+                    <p>Courses are grouped into key learning categories to help users browse efficiently.</p>
+                </div>
+
+                <!-- 🔽 ENROLLMENTS -->
+                <div id="enrollments" class="mb-5">
+                    <h5 class="text-secondary fw-semibold">👨‍🎓 Enrollments ({{ enrollments }})</h5>
+                    <p>Total number of students enrolled across all courses.</p>
+                </div>
+
+                <!-- 🔽 COURSE REVIEWS -->
+                <div id="courseReviews" class="mb-5">
+                    <h5 class="text-danger fw-semibold">📝 Course Reviews ({{ courseReviews }})</h5>
+                    <p>Feedback and ratings provided by students after completing the courses.</p>
+                </div>
+
+            </div>
+        </div>
+
+
+        <!--UserList -->
+        <!-- <div class="container mt-4">
+            <h3 class="mb-3">Logged-in Users</h3>
+            <table class="table table-bordered table-striped">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Login Time</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let user of users; let i = index">
+                        <td>{{ i + 1 }}</td>
+                        <td>{{ user.name }}</td>
+                        <td>{{ user.email }}</td>
+                        <td>{{user.loginTime ? (user.loginTime | date:'short'): 'Not logged in'}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div> -->
+        <!-- Footer -->
+        <!-- <footer class="bg-light border-top mt-auto py-3 text-center shadow-sm">
+            <div class="container">
+                <span class="text-muted">
+                    © 2025 EduPortal Admin Panel | Developed by <strong>Your Name</strong>
+                </span>
+            </div>
+        </footer> -->

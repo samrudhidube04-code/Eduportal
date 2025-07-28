@@ -1,0 +1,25 @@
+<form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+
+    <!-- Name -->
+    <input type="text" class="form-control" formControlName="name" placeholder="Full Name">
+
+    <!-- Email -->
+    <input type="email" class="form-control" formControlName="email" placeholder="Email">
+
+    <!-- Password -->
+    <input type="password" class="form-control" formControlName="password" placeholder="Password">
+
+    <!-- Confirm Password -->
+    <input type="password" class="form-control" formControlName="confirmPassword" placeholder="Confirm Password">
+
+    <!-- Role -->
+    <select class="form-select" formControlName="role" required>
+        <option value="" disabled>Select a role</option>
+        <option value="Student">Student</option>
+        <option value="Admin">Admin</option>
+    </select>
+
+
+    <button type="submit" class="btn btn-primary mt-3">Register</button>
+
+</form>

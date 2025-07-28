@@ -1,0 +1,23 @@
+[
+    {
+        "id": 1,
+        "name": "Web Development",
+        "description": "Learn HTML, CSS, JS, and Bootstrap.",
+        "price": 4999,
+        "image": "assets/web.webp"
+    },
+    {
+        "id": 2,
+        "name": "Data Science",
+        "description": "Python, ML, and data analysis.",
+        "price": 5999,
+        "image": "assets/data.webp"
+    },
+    {
+        "id": 3,
+        "name": "Graphic Design",
+        "description": "Photoshop, Illustrator, UI/UX basics.",
+        "price": 3999,
+        "image": "assets/graphic.webp"
+    }
+]

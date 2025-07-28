@@ -1,0 +1,64 @@
+<div class="container py-4">
+    <h3 class="fw-bold text-primary mb-4">👥 User Reports</h3>
+
+    <!-- Filters -->
+    <div class="row g-3 mb-4">
+        <div class="col-md-3">
+            <input type="text" class="form-control" placeholder="Search by Name" [(ngModel)]="searchTerm" />
+        </div>
+        <div class="col-md-3">
+            <select class="form-select" [(ngModel)]="roleFilter">
+                <option value="">All Roles</option>
+                <option value="Admin">Admin</option>
+                <!-- <option value="Teacher">Teacher</option> -->
+                <option value="Student">Student</option>
+            </select>
+        </div>
+        <!-- <div class="col-md-3">
+             <select class="form-select" [(ngModel)]="statusFilter">
+                <option value="">All Status</option>
+                <option value="Active">Active</option>
+                <option value="Deactive">Deactive</option>
+            </select>  
+    </div> -->
+        <div class="col-md-3">
+            <button class="btn btn-primary w-100" (click)="applyFilter()">
+                <i class="bi bi-funnel-fill me-1"></i> Apply Filter
+            </button>
+        </div>
+    </div>
+
+    <!-- User Table -->
+    <div class="table-responsive shadow rounded">
+        <table class="table table-bordered table-hover align-middle">
+            <thead class="table-light">
+                <tr>
+                    <th>#</th>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Role</th>
+                    <!-- <th>Status</th> -->
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let user of filteredUsers; let i = index">
+                    <td>{{ i + 1 }}</td>
+                    <td>{{ user.name }}</td>
+                    <td>{{ user.email }}</td>
+                    <td>{{ user.role }}</td>
+                    <!-- <td>
+                        <span class="badge" [ngClass]="{
+                'bg-success': user.status === 'Active',
+                'bg-danger': user.status === 'Deactive'
+              }">
+                            {{ user.status }}
+                        </span>
+                    </td> -->
+                </tr>
+                <tr *ngIf="filteredUsers.length === 0">
+                    <td colspan="5" class="text-center text-muted">No users found.</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

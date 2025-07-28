@@ -1,0 +1,39 @@
+<div class="container d-flex align-items-center justify-content-center min-vh-100">
+    <div class="card shadow-lg border-0 p-4 rounded-4 w-100" style="max-width: 450px;">
+        <h2 class="text-center mb-4 text-primary">Login</h2>
+
+        <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" novalidate>
+            <div class="form-floating mb-3">
+                <input type="email" class="form-control" id="email" placeholder="Email" formControlName="email">
+                <label for="email"><i class="bi bi-envelope"></i> Email address</label>
+                <div class="text-danger mt-1" *ngIf="submitted && loginForm.controls['email'].errors">
+                    Valid email is required.
+                </div>
+            </div>
+
+            <div class="form-floating mb-3">
+                <input type="password" class="form-control" id="password" placeholder="Password"
+                    formControlName="password">
+                <label for="password"><i class="bi bi-lock"></i> Password</label>
+                <div class="text-danger mt-1" *ngIf="submitted && loginForm.controls['password'].errors">
+                    Password is required.
+                </div>
+            </div>
+
+            <div *ngIf="loginError" class="alert alert-danger py-2 text-center">
+                {{ loginError }}
+            </div>
+
+            <button class="btn btn-primary w-100 mb-3" type="submit">Login</button>
+
+            <div class="text-center">
+                <a class="text-decoration-none small text-muted" routerLink="/forgetpass">Forgot Password?</a>
+            </div>
+
+            <div class="text-center mt-3">
+                <span class="text-muted">Don't have an account? </span>
+                <a class="text-primary fw-semibold text-decoration-none" routerLink="/register">Register</a>
+            </div>
+        </form>
+    </div>
+</div>

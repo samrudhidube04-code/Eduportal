@@ -1,0 +1,25 @@
+ body {
+     font-family: 'Segoe UI', sans-serif;
+ }
+
+ .hero {
+     background: linear-gradient(to right, #0052D4, #4364F7, #6FB1FC);
+     color: white;
+     padding: 60px 30px;
+     text-align: center;
+ }
+
+ .card img {
+     max-height: 150px;
+     object-fit: cover;
+ }
+
+ .section-title {
+     margin: 40px 0 20px;
+ }
+
+ .testimonial {
+     background-color: #f8f9fa;
+     padding: 30px;
+     border-left: 4px solid #0d6efd;
+ }

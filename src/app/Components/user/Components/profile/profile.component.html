@@ -1,0 +1,45 @@
+<div class="container mt-4">
+    <div class="card shadow-sm p-4">
+        <h4 class="mb-3">👤 User Profile</h4>
+
+        <!-- Profile Display -->
+        <div *ngIf="!isEditing">
+            <div class="row">
+
+                <div class="col-md-9">
+                    <p><strong>Name:</strong> {{ user.name }}</p>
+                    <p><strong>Email:</strong> {{ user.email }}</p>
+                    <p><strong>Role:</strong> {{ user.role }}</p>
+                    <p><strong>Phone:</strong> {{ user.phone }}</p>
+                    <button class="btn btn-primary" (click)="isEditing = true">✏️ Edit Profile</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Profile Edit Form -->
+        <form *ngIf="isEditing" (ngSubmit)="saveProfile()" #editForm="ngForm">
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <label class="form-label">Name</label>
+                    <input type="text" class="form-control" [(ngModel)]="user.name" name="name" required>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <label class="form-label">Email</label>
+                    <input type="email" class="form-control" [(ngModel)]="user.email" name="email" required>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <label class="form-label">Role</label>
+                    <input type="text" class="form-control" [(ngModel)]="user.role" name="role">
+                </div>
+                <div class="col-md-6 mb-3">
+                    <label class="form-label">Phone</label>
+                    <input type="text" class="form-control" [(ngModel)]="user.phone" name="phone">
+                </div>
+
+            </div>
+
+            <button class="btn btn-success" type="submit" [disabled]="!editForm.form.valid">💾 Save</button>
+            <button class="btn btn-secondary ms-2" type="button" (click)="isEditing = false">Cancel</button>
+        </form>
+    </div>
+</div>
